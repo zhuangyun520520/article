@@ -197,7 +197,7 @@ Vue 的模板不仅仅是静态的 HTML，还包括了动态内容和复杂的�
 
 <p align=center>图3 Token 列表、父级元素栈和 AST</p>
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/639467850f3b4468adecb8390ae69f3b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5ZCD6aaZ6I-c5ZCD5YK755qE:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTgwNTg1MzI2NDk4MjU5NSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1739779892&x-orig-sign=XyvCl8VvykRkD7n876YipmeTj9E%3Dhttps://github.com/zhuangyun520520/article/blob/main/pictures/Vue%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86%E5%92%8C%E5%BB%BA%E8%AE%AE%E5%AE%9E%E7%8E%B0/%E5%9B%BE%E7%89%874.png)
+![image.png](https://github.com/zhuangyun520520/article/blob/main/pictures/Vue%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86%E5%92%8C%E5%BB%BA%E8%AE%AE%E5%AE%9E%E7%8E%B0/%E5%9B%BE%E7%89%874.png)
 
 <p align=center>图4 构建过程中Token 列表、父级元素栈和 AST的状态。</p>
 由于模版太简单，所以模版Ast呈现的比较简单。
@@ -282,7 +282,7 @@ Vue 的模板不仅仅是静态的 HTML，还包括了动态内容和复杂的�
 <p align=center>图5 模版AST</p>
 转换后的javaScript AST
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/67569fadec8344c98845d6a88f667d01~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5ZCD6aaZ6I-c5ZCD5YK755qE:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTgwNTg1MzI2NDk4MjU5NSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1739779892&x-orig-sign=ZuA6EfyuR%2Fl3lupi6NCNtw5P0JI%3D)
+![image.png](https://github.com/zhuangyun520520/article/blob/main/pictures/Vue%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86%E5%92%8C%E5%BB%BA%E8%AE%AE%E5%AE%9E%E7%8E%B0/%E5%9B%BE%E7%89%876.png)
 
 <p align=center>图6 javaScriptAST</p>
 
