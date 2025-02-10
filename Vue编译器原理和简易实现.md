@@ -8,7 +8,7 @@ Vue 之所以需要 **编译器** ，是因为它提供了一个基于 **模板*
 
 ## 3 编译器的完整流程
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/9c40524a0eb34ab7b841bc956ae8f983~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5ZCD6aaZ6I-c5ZCD5YK755qE:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTgwNTg1MzI2NDk4MjU5NSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1739779892&x-orig-sign=K%2B2shZr%2FYPG9eZfrF5dE5pAU%2FIw%3D)
+![image.png](https://github.com/zhuangyun520520/article/blob/main/pictures/Vue%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86%E5%92%8C%E5%BB%BA%E8%AE%AE%E5%AE%9E%E7%8E%B0/%E5%9B%BE%E7%89%871.png)
 
 <p align=center>图1.1完整的编译流程</p>
 从图中可以看出编译分为三个部分：
@@ -36,7 +36,7 @@ Vue 之所以需要 **编译器** ，是因为它提供了一个基于 **模板*
 字符的输入，解析器会自动地在不同状态间迁移。
 下图为解析器的状态机图。
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/ac9b9a87bb724ba8808aa5f87e8a78ff~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5ZCD6aaZ6I-c5ZCD5YK755qE:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTgwNTg1MzI2NDk4MjU5NSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1739779892&x-orig-sign=08dccTuO3%2FEgkWZ98ESbDoFUyP0%3D) <p align=center>图2 解析器的状态迁移过程</p>
+![image.png](https://github.com/zhuangyun520520/article/blob/main/pictures/Vue%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86%E5%92%8C%E5%BB%BA%E8%AE%AE%E5%AE%9E%E7%8E%B0/%E5%9B%BE%E7%89%872.png) <p align=center>图2 解析器的状态迁移过程</p>
 
 图2给出的状态机并不严谨。实际上，解析HTML并构造Token的过程是有规范可循的。在WHATWG发布的关于浏览器解析HTML的规范中，详细阐述了状态迁移。
 
@@ -187,17 +187,17 @@ Vue 的模板不仅仅是静态的 HTML，还包括了动态内容和复杂的�
       console.log("tokens", tokens);
 ```
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/211f8283d9d64f5995745b87c33ff733~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5ZCD6aaZ6I-c5ZCD5YK755qE:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTgwNTg1MzI2NDk4MjU5NSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1739779892&x-orig-sign=EjUEsX99h954mVBQWW7IjJ29vFo%3D)
+![image.png](https://github.com/zhuangyun520520/article/blob/main/pictures/Vue%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86%E5%92%8C%E5%BB%BA%E8%AE%AE%E5%AE%9E%E7%8E%B0/%E5%9B%BE%E7%89%875.png)
 
 ### 4.2 构建模版AST
 
 根据 Token 列表构建 AST 的过程，其实就是对 Token 列表进行扫描的过程。从第一个 Token 开始，顺序地扫描整个 Token 列表，直到列表中的所有 Token 处理完毕。在这个过程中，我们需要维护一个栈elementStack，这个栈将用于维护元素间的父子关系。每遇到一个开始标签节点，我们就构造一个 Element 类型的 AST 节点，并将其压入栈中。类似地，每当遇到一个结束标签节点，我们就将当前栈顶的节点弹出。这样，栈顶的节点将始终充当父节点的角色。扫描过程中遇到的所有节点，都会作为当前栈顶节点的子节点，并添加到栈顶节点的 children 属性下。
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/58b4add4b2094e3e93b3c7f15ff9772b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5ZCD6aaZ6I-c5ZCD5YK755qE:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTgwNTg1MzI2NDk4MjU5NSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1739779892&x-orig-sign=VktFC7V03Uv5wZyikZ1E6H%2FNB0o%3D)
+![image.png](https://github.com/zhuangyun520520/article/blob/main/pictures/Vue%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86%E5%92%8C%E5%BB%BA%E8%AE%AE%E5%AE%9E%E7%8E%B0/%E5%9B%BE%E7%89%873.png)
 
 <p align=center>图3 Token 列表、父级元素栈和 AST</p>
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/639467850f3b4468adecb8390ae69f3b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5ZCD6aaZ6I-c5ZCD5YK755qE:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTgwNTg1MzI2NDk4MjU5NSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1739779892&x-orig-sign=XyvCl8VvykRkD7n876YipmeTj9E%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/639467850f3b4468adecb8390ae69f3b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5ZCD6aaZ6I-c5ZCD5YK755qE:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTgwNTg1MzI2NDk4MjU5NSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1739779892&x-orig-sign=XyvCl8VvykRkD7n876YipmeTj9E%3Dhttps://github.com/zhuangyun520520/article/blob/main/pictures/Vue%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86%E5%92%8C%E5%BB%BA%E8%AE%AE%E5%AE%9E%E7%8E%B0/%E5%9B%BE%E7%89%874.png)
 
 <p align=center>图4 构建过程中Token 列表、父级元素栈和 AST的状态。</p>
 由于模版太简单，所以模版Ast呈现的比较简单。
